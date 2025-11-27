@@ -1,0 +1,1 @@
+export { FaceRecognitionService } from './faceRecognition';
