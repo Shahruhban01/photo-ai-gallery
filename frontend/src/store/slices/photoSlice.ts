@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { photoService, Photo, PhotosResponse } from '../../services';
+import { photoService, Photo } from '../../services';
 
 interface PhotoState {
   photos: Photo[];

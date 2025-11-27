@@ -23,6 +23,8 @@ export class FaceRecognitionService {
    * This is a placeholder implementation
    */
   async detectFaces(imagePath: string): Promise<FaceData[]> {
+    // TODO: Integrate face-api.js for actual face detection
+    // This is a placeholder implementation that returns an empty array.
     // In a real implementation, this would:
     // 1. Load the image using canvas
     // 2. Run face detection using face-api.js

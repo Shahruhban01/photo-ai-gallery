@@ -134,8 +134,10 @@ export const updateAlbum = async (req: AuthRequest, res: Response): Promise<void
 
 export const deleteAlbum = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
+    const albumId = req.params.id;
+    
     const album = await Album.findOneAndDelete({
-      _id: req.params.id,
+      _id: albumId,
       userId: req.userId,
     });
 
@@ -146,7 +148,7 @@ export const deleteAlbum = async (req: AuthRequest, res: Response): Promise<void
 
     // Remove album reference from photos
     await Photo.updateMany(
-      { albumId: album._id },
+      { albumId: albumId },
       { $unset: { albumId: '' } }
     );
 

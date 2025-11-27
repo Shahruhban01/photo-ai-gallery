@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchAlbums, createAlbum, deleteAlbum } from '../store/slices/albumSlice';
 import { LoadingSpinner, CreateAlbumModal } from '../components';
+import { getApiBaseUrl } from '../services';
 
 export const AlbumsPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ export const AlbumsPage: React.FC = () => {
               <div className="aspect-video bg-gray-100 flex items-center justify-center">
                 {album.coverPhoto ? (
                   <img
-                    src={`http://localhost:5000${album.coverPhoto}`}
+                    src={`${getApiBaseUrl()}${album.coverPhoto}`}
                     alt={album.name}
                     className="w-full h-full object-cover"
                   />

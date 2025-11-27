@@ -1,13 +1,14 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
 import { signup, login, getProfile, updateProfile } from '../controllers';
-import { authenticate, validate } from '../middleware';
+import { authenticate, validate, authLimiter, apiLimiter } from '../middleware';
 
 const router = Router();
 
 // Signup
 router.post(
   '/signup',
+  authLimiter,
   [
     body('email').isEmail().withMessage('Please enter a valid email'),
     body('password')
@@ -27,6 +28,7 @@ router.post(
 // Login
 router.post(
   '/login',
+  authLimiter,
   [
     body('email').isEmail().withMessage('Please enter a valid email'),
     body('password').notEmpty().withMessage('Password is required'),
@@ -36,11 +38,12 @@ router.post(
 );
 
 // Get profile (protected)
-router.get('/profile', authenticate, getProfile);
+router.get('/profile', apiLimiter, authenticate, getProfile);
 
 // Update profile (protected)
 router.put(
   '/profile',
+  apiLimiter,
   authenticate,
   [
     body('name')

@@ -9,15 +9,16 @@ import {
   deletePhoto,
   searchPhotos,
 } from '../controllers';
-import { authenticate, upload } from '../middleware';
+import { authenticate, upload, apiLimiter, uploadLimiter } from '../middleware';
 
 const router = Router();
 
-// All routes require authentication
+// All routes require authentication and rate limiting
 router.use(authenticate);
+router.use(apiLimiter);
 
-// Upload photos
-router.post('/upload', upload.array('photos', 20), uploadPhotos);
+// Upload photos (stricter rate limit)
+router.post('/upload', uploadLimiter, upload.array('photos', 20), uploadPhotos);
 
 // Get all photos
 router.get('/', getPhotos);

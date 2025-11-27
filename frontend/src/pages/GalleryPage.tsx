@@ -9,7 +9,7 @@ export const GalleryPage: React.FC = () => {
   const { photos, loading, pagination } = useAppSelector((state) => state.photos);
 
   useEffect(() => {
-    dispatch(fetchPhotos());
+    dispatch(fetchPhotos({}));
   }, [dispatch]);
 
   const handleFavoriteToggle = (photo: Photo) => {

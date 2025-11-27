@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchPersons, clusterFaces } from '../store/slices/faceSlice';
 import { LoadingSpinner } from '../components';
+import { getApiBaseUrl } from '../services';
 
 export const PeoplePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -81,7 +82,7 @@ export const PeoplePage: React.FC = () => {
               <div className="aspect-square bg-gray-100 flex items-center justify-center">
                 {person.thumbnailUrl ? (
                   <img
-                    src={`http://localhost:5000${person.thumbnailUrl}`}
+                    src={`${getApiBaseUrl()}${person.thumbnailUrl}`}
                     alt={person.name}
                     className="w-full h-full object-cover"
                   />

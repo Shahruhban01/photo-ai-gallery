@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Photo } from '../services/photoService';
+import { getApiBaseUrl } from '../services';
 
 interface PhotoGridProps {
   photos: Photo[];
@@ -59,7 +60,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({
           {/* Thumbnail */}
           <Link to={selectable ? '#' : `/photos/${photo.id}`} onClick={(e) => selectable && e.preventDefault()}>
             <img
-              src={`http://localhost:5000${photo.thumbnailUrl}`}
+              src={`${getApiBaseUrl()}${photo.thumbnailUrl}`}
               alt={photo.originalName}
               className="w-full h-full object-cover transition-transform group-hover:scale-105"
               loading="lazy"

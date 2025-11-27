@@ -8,12 +8,13 @@ import {
   clusterFaces,
   assignFaceToPerson,
 } from '../controllers';
-import { authenticate, validate } from '../middleware';
+import { authenticate, validate, apiLimiter } from '../middleware';
 
 const router = Router();
 
-// All routes require authentication
+// All routes require authentication and rate limiting
 router.use(authenticate);
+router.use(apiLimiter);
 
 // Get all persons
 router.get('/persons', getPersons);

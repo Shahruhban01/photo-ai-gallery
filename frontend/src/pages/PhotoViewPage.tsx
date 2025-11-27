@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchPhoto, updatePhoto, deletePhoto } from '../store/slices/photoSlice';
 import { LoadingSpinner } from '../components';
+import { getApiBaseUrl } from '../services';
 
 export const PhotoViewPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -76,7 +77,7 @@ export const PhotoViewPage: React.FC = () => {
 
       <div className="bg-black rounded-xl overflow-hidden flex items-center justify-center min-h-[60vh]">
         <img
-          src={`http://localhost:5000/api/photos/${currentPhoto.id}/image`}
+          src={`${getApiBaseUrl()}/api/photos/${currentPhoto.id}/image`}
           alt={currentPhoto.originalName}
           className="max-w-full max-h-[80vh] object-contain"
         />

@@ -9,12 +9,13 @@ import {
   addPhotosToAlbum,
   removePhotosFromAlbum,
 } from '../controllers';
-import { authenticate, validate } from '../middleware';
+import { authenticate, validate, apiLimiter } from '../middleware';
 
 const router = Router();
 
-// All routes require authentication
+// All routes require authentication and rate limiting
 router.use(authenticate);
+router.use(apiLimiter);
 
 // Create album
 router.post(
