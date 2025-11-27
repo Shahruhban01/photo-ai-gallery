@@ -13,9 +13,9 @@ import { authenticate, validate, apiLimiter } from '../middleware';
 
 const router = Router();
 
-// All routes require authentication and rate limiting
-router.use(authenticate);
+// Rate limiting comes first, then authentication
 router.use(apiLimiter);
+router.use(authenticate);
 
 // Create album
 router.post(

@@ -13,9 +13,9 @@ import { authenticate, upload, apiLimiter, uploadLimiter } from '../middleware';
 
 const router = Router();
 
-// All routes require authentication and rate limiting
-router.use(authenticate);
+// Rate limiting comes first, then authentication
 router.use(apiLimiter);
+router.use(authenticate);
 
 // Upload photos (stricter rate limit)
 router.post('/upload', uploadLimiter, upload.array('photos', 20), uploadPhotos);
